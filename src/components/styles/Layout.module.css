@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .header {
+    background: #0070f3;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .main {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .footer {
+    background: #f1f1f1;
+    text-align: center;
+    padding: 10px;
+  }  

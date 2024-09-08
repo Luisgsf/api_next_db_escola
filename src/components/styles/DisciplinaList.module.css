@@ -1,0 +1,14 @@
+.disciplinaList {
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.disciplinaList ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.disciplinaList li {
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}

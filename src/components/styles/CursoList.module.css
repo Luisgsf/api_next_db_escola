@@ -1,0 +1,26 @@
+.cursoList {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #ffffff; /* Fundo branco para o componente */
+  border-radius: 8px; /* Borda arredondada para um visual mais agradável */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para destaque */
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cursoItem {
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.detailsLink {
+  color: #0070f3;
+  font-weight: bold;
+}
+
+.detailsLink:hover {
+  text-decoration: underline;
+}
