@@ -1,9 +1,53 @@
+.container {
+  padding: 20px;
+  background-color: #f9f9f9; /* Fundo claro para o container */
+  color: #333; /* Texto escuro para contraste */
+  border-radius: 8px; /* Borda arredondada */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para destacar o container */
+}
+
+.cursoInfo {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #ffffff; /* Fundo branco para a seção do curso */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.courseDetails {
+  margin: 10px 0;
+}
+
+.courseDetails label {
+  font-weight: bold;
+  display: block;
+}
+
+.courseDetails p {
+  margin: 5px 0;
+}
+
+.disciplinasGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Grid com colunas flexíveis */
+  gap: 20px;
+  padding: 20px;
+}
+
+.disciplinaCard {
+  background-color: #ffffff; /* Fundo branco para o card da disciplina */
+  border: 1px solid #ddd; /* Borda sutil */
+  padding: 20px;
+  border-radius: 8px; /* Borda arredondada */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
 .cursoList {
   margin-top: 20px;
   padding: 20px;
-  background-color: #ffffff; /* Fundo branco para o componente */
-  border-radius: 8px; /* Borda arredondada para um visual mais agradável */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para destaque */
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .list {

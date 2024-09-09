@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import styles from '../../components/styles/CursoList.module.css';  // Estilos customizados
 
 type Curso = {
   id_curso: number;
@@ -23,6 +24,7 @@ export default function Curso() {
   const [disciplinas, setDisciplinas] = useState<Disciplina[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  console.log("Testando Descrição: ", curso?.tx_descricao);
 
   useEffect(() => {
     if (id) {
@@ -31,42 +33,30 @@ export default function Curso() {
 
       // Buscar informações do curso
       fetch(`/api/cursos/${id}`)
-        .then((response) => {
-          console.log('Response for curso:', response); // Log da resposta
-          return response.json();
-        })
+        .then((response) => response.json())
         .then((data) => {
-          console.log('Data for curso:', data); // Log dos dados recebidos
+          console.log("Curso data:", data); // Verifique o conteúdo
           if (data.message) {
             setError(data.message);
           } else {
             setCurso(data);
           }
         })
-        .catch((err) => {
-          console.error('Error fetching curso:', err); // Log de erro
-          setError('Erro ao carregar o curso');
-        })
+        .catch(() => setError('Erro ao carregar o curso'))
         .finally(() => setLoading(false));
 
       // Buscar disciplinas relacionadas ao curso
       fetch(`/api/cursos/${id}/disciplinas`)
-        .then((response) => {
-          console.log('Response for disciplinas:', response); // Log da resposta
-          return response.json();
-        })
+        .then((response) => response.json())
         .then((data) => {
-          console.log('Data for disciplinas:', data); // Log dos dados recebidos
+          console.log("Disciplinas data:", data); // Verifique o conteúdo
           if (data.message) {
             setError(data.message);
           } else {
             setDisciplinas(data);
           }
         })
-        .catch((err) => {
-          console.error('Error fetching disciplinas:', err); // Log de erro
-          setError('Erro ao carregar disciplinas');
-        });
+        .catch(() => setError('Erro ao carregar disciplinas'));
     }
   }, [id]);
 
@@ -79,12 +69,18 @@ export default function Curso() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       {curso ? (
-        <div>
+        <div className={styles.cursoInfo}>
           <h1>Curso: {curso.tx_descricao}</h1>
-          <p><strong>Tipo de Curso:</strong> {curso.tipo_curso}</p>
-          <p><strong>Instituição:</strong> {curso.instituicao}</p>
+          <div className={styles.courseDetails}>
+            <label><strong>Tipo de Curso:</strong></label>
+            <p>{curso.tipo_curso}</p>
+          </div>
+          <div className={styles.courseDetails}>
+            <label><strong>Instituição:</strong></label>
+            <p>{curso.instituicao}</p>
+          </div>
         </div>
       ) : (
         <p>Curso não encontrado.</p>
@@ -92,13 +88,16 @@ export default function Curso() {
 
       <h2>Disciplinas</h2>
       {disciplinas.length > 0 ? (
-        <ul>
+        <div className={styles.disciplinasGrid}>
           {disciplinas.map((disciplina) => (
-            <li key={disciplina.id_disciplina}>
-              {disciplina.tx_sigla} - {disciplina.tx_descricao} (Período: {disciplina.in_periodo}, Carga Horária: {disciplina.in_carga_horaria} horas)
-            </li>
+            <div key={disciplina.id_disciplina} className={styles.disciplinaCard}>
+              <h3>{disciplina.tx_sigla}</h3>
+              <p>{disciplina.tx_descricao}</p>
+              <p><strong>Período:</strong> {disciplina.in_periodo}</p>
+              <p><strong>Carga Horária:</strong> {disciplina.in_carga_horaria} horas</p>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <p>Nenhuma disciplina encontrada.</p>
       )}

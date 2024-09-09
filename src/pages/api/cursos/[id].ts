@@ -9,9 +9,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       // Query para buscar todas as informações de um curso específico
       const result = await pool.query(
-        `SELECT curso.id_curso, curso.tx_descricao AS "Nome do Curso",
-	     tipo_curso.tx_descricao AS "Tipo de Curso",
-       instituicao.tx_descricao AS Instituicao
+        `SELECT curso.id_curso, curso.tx_descricao AS tx_descricao,
+	     tipo_curso.tx_descricao AS tipo_curso,
+       instituicao.tx_descricao AS instituicao
        FROM curso
        JOIN tipo_curso ON curso.id_tipo_curso = tipo_curso.id_tipo_curso
        JOIN instituicao ON curso.id_instituicao = instituicao.id_instituicao
