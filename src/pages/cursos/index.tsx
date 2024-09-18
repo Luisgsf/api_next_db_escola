@@ -1,45 +1,20 @@
-// pages/cursos/index.tsx
 import { useEffect, useState } from 'react';
-import CursoList from '../../components/CursoList';
-import DisciplinaList from '../../components/DisciplinaList';
-import SearchBar from '../../components/SearchBar';
+import axios from 'axios';
+import CursoList from '../../components/CursoList'; // Exibe apenas a lista de cursos
 import Layout from '../../components/Layout';
 
 const Cursos = () => {
-  const [cursos, setCursos] = useState([]);
-  const [cursoId, setCursoId] = useState('');
-  const [disciplinas, setDisciplinas] = useState([]);
-  const [idsCursos, setIdsCursos] = useState<string[]>([]);
+  const [cursos, setCursos] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch('/api/cursos')
-      .then((res) => res.json())
-      .then((data) => {
-        setCursos(data);
-        setIdsCursos(data.map((curso: any) => curso.id_curso));
-      })
-      .catch((err) => console.error('Erro ao buscar cursos:', err));
+    axios.get('/api/cursos')
+      .then((response) => setCursos(response.data))
+      .catch((error) => console.error('Erro ao buscar cursos:', error));
   }, []);
-
-  const handleSearchById = () => {
-    if (cursoId) {
-      fetch(`/api/cursos/${cursoId}/disciplinas`)
-        .then((res) => res.json())
-        .then((data) => setDisciplinas(data))
-        .catch((err) => console.error('Erro ao buscar disciplinas:', err));
-    }
-  };
 
   return (
     <Layout>
-      <CursoList cursos={cursos} />
-      <SearchBar
-        idsCursos={idsCursos}
-        cursoId={cursoId}
-        setCursoId={setCursoId}
-        onSearch={handleSearchById}
-      />
-      <DisciplinaList disciplinas={disciplinas} cursoId={cursoId} />
+      <CursoList cursos={cursos} /> {/* Exibe a lista de cursos */}
     </Layout>
   );
 };

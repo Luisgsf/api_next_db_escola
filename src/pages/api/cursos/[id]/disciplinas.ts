@@ -13,11 +13,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         disciplina.tx_descricao AS tx_descricao,
 		    disciplina.in_periodo AS in_periodo, disciplina.in_carga_horaria AS in_carga_horaria
         FROM disciplina
-        WHERE disciplina.id_curso = $1;`,
+        WHERE disciplina.id_curso = $1
+        ORDER BY tx_descricao ASC;`,
         [id]
       );
 
-      console.log("Disciplinas result:", result.rows); // Verifique os dados
+      // console.log("Disciplinas result:", result.rows); // Verifique os dados caso necessário
 
       if (result.rows.length === 0) {
         return res.status(404).json({ message: 'Nenhuma disciplina encontrada para esse curso.' });

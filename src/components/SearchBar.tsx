@@ -2,27 +2,26 @@
 import React from 'react';
 
 interface SearchBarProps {
-  idsCursos: string[];
+  cursos: { id_curso: string; tx_descricao: string }[]; // Cursos com ID e nome
   cursoId: string;
   setCursoId: (id: string) => void;
   onSearch: () => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ idsCursos, cursoId, setCursoId, onSearch }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ cursos, cursoId, setCursoId, onSearch }) => {
   return (
-    <div style={{ marginBottom: '20px' }}>
-      <h2>Buscar disciplinas por ID do curso</h2>
-      <select
-        value={cursoId}
-        onChange={(e) => setCursoId(e.target.value)}
-        style={{ fontSize: '16px', padding: '10px' }}
-      >
-        <option value="">Selecione um ID</option>
-        {idsCursos.map((id) => (
-          <option key={id} value={id}>{id}</option>
+    <div>
+      <select value={cursoId} onChange={(e) => setCursoId(e.target.value)}>
+        <option value="">Selecione um curso</option>
+        {cursos.map((curso) => (
+          <option key={curso.id_curso} value={curso.id_curso}>
+            {curso.tx_descricao}
+          </option>
         ))}
       </select>
-      <button onClick={onSearch} style={{ marginLeft: '10px' }}>Buscar Disciplinas</button>
+      <button onClick={onSearch} disabled={!cursoId}>
+        Buscar Disciplinas
+      </button>
     </div>
   );
 };

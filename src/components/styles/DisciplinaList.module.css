@@ -1,14 +1,34 @@
-.disciplinaList {
-  margin-top: 20px;
+/* DisciplinaList.module.css */
+.disciplinaContainer {
+  margin: 20px;
   padding: 20px;
 }
 
-.disciplinaList ul {
-  list-style-type: none;
-  padding: 0;
+.dataGrid {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-.disciplinaList li {
-  padding: 10px 0;
-  border-bottom: 1px solid #ddd;
+.dataGrid th, .dataGrid td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.dataGrid th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.dataGrid tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.dataGrid tr:hover {
+  background-color: #f1f1f1;
+}
+
+.dataGrid td {
+  font-size: 14px;
 }

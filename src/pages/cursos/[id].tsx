@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import styles from '../../components/styles/CursoList.module.css';  // Estilos customizados
+import axios from 'axios';
+import styles from '../../components/styles/CursoList.module.css'; // Estilos customizados
 
 type Curso = {
   id_curso: number;
@@ -24,7 +25,6 @@ export default function Curso() {
   const [disciplinas, setDisciplinas] = useState<Disciplina[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  console.log("Testando Descrição: ", curso?.tx_descricao);
 
   useEffect(() => {
     if (id) {
@@ -32,29 +32,17 @@ export default function Curso() {
       setError(null);
 
       // Buscar informações do curso
-      fetch(`/api/cursos/${id}`)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Curso data:", data); // Verifique o conteúdo
-          if (data.message) {
-            setError(data.message);
-          } else {
-            setCurso(data);
-          }
+      axios.get(`/api/cursos/${id}`)
+        .then((response) => {
+          setCurso(response.data);
         })
         .catch(() => setError('Erro ao carregar o curso'))
         .finally(() => setLoading(false));
 
       // Buscar disciplinas relacionadas ao curso
-      fetch(`/api/cursos/${id}/disciplinas`)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Disciplinas data:", data); // Verifique o conteúdo
-          if (data.message) {
-            setError(data.message);
-          } else {
-            setDisciplinas(data);
-          }
+      axios.get(`/api/cursos/${id}/disciplinas`)
+        .then((response) => {
+          setDisciplinas(response.data);
         })
         .catch(() => setError('Erro ao carregar disciplinas'));
     }
