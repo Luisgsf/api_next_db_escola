@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         disciplina.tx_descricao AS tx_descricao,
 		    disciplina.in_periodo AS in_periodo, disciplina.in_carga_horaria AS in_carga_horaria
         FROM disciplina
-        WHERE disciplina.id_curso = $1
+        WHERE disciplina.fk_id_curso = $1
         ORDER BY tx_descricao ASC;`,
         [id]
       );

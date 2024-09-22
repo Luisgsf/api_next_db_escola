@@ -13,8 +13,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	     tipo_curso.tx_descricao AS tipo_curso,
        instituicao.tx_descricao AS instituicao
        FROM curso
-       JOIN tipo_curso ON curso.id_tipo_curso = tipo_curso.id_tipo_curso
-       JOIN instituicao ON curso.id_instituicao = instituicao.id_instituicao
+       JOIN tipo_curso ON curso.fk_id_tipo_curso = tipo_curso.id_tipo_curso
+       JOIN instituicao ON curso.fk_id_instituicao = instituicao.id_instituicao
        WHERE curso.id_curso = $1;`,
         [id]
       );
