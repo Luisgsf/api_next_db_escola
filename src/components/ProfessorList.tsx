@@ -1,9 +1,9 @@
 import React from 'react';
+import { FaEdit, FaTimes } from 'react-icons/fa';
 import styles from './styles/ProfessorList.module.css';
 
 type Professor = {
   id_professor: number;
-  id_titulo: number;
   tx_nome: string;
   tx_sexo: string;
   tx_estado_civil: string;
@@ -48,8 +48,14 @@ const ProfessorList: React.FC<ProfessorListProps> = ({ professores, onEdit, onDe
               <td>{new Date(professor.dt_nascimento).toLocaleDateString('pt-BR')}</td>
               <td>{professor.tx_telefone}</td>
               <td>
-                <button onClick={() => onEdit(professor)}>Editar</button>
-                <button onClick={() => onDelete(professor.id_professor)}>Excluir</button>
+                <div className={styles.buttonContainer}>
+                  <button className={styles.saveButton} onClick={() => onEdit(professor)}>
+                    <FaEdit /> Editar
+                  </button>
+                  <button className={styles.cancelButton} onClick={() => onDelete(professor.id_professor)}>
+                    <FaTimes /> Excluir
+                  </button>
+                </div>
               </td>
             </tr>
           ))}

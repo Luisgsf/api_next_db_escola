@@ -1,13 +1,13 @@
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import axios from 'axios';
 import Layout from '../../components/Layout';
 import ProfessorList from '../../components/ProfessorList';
-import { useRouter } from 'next/router';
+import styles from '../../components/styles/ProfessorList.module.css'
+import { FaPlus } from 'react-icons/fa'; // Importando ícones
 
 const Professores: React.FC = () => {
   const [professores, setProfessores] = useState<any[]>([]);
-  const router = useRouter();
 
   useEffect(() => {
     const fetchProfessores = async () => {
@@ -28,16 +28,22 @@ const Professores: React.FC = () => {
   };
 
   const handleEdit = (professor: any) => {
-    router.push(`/professores/form?id=${professor.id_professor}`);
+    window.open(`/professores/formPage?id=${professor.id_professor}`, '_blank');
   };
 
   return (
     <Layout>
       <h1>Professores</h1>
-      <Link href="/professores/form">
-        <button>Adicionar Professor</button>
+      <Link href="/professores/formPage" target="_blank" rel="noopener noreferrer">
+        <button className={styles.saveButton}>
+          <FaPlus /> Adicionar Professor
+        </button>
       </Link>
-      <ProfessorList professores={professores} onEdit={handleEdit} onDelete={handleDelete} />
+      <ProfessorList
+        professores={professores}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
     </Layout>
   );
 };
